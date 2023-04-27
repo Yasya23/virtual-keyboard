@@ -64,6 +64,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 3px;
   align-items: center;
   box-shadow: 1px 1px 2px 0px #a87961;
   padding: 2px;
@@ -103,12 +104,12 @@
   margin-bottom: 2px;
 }
 
-.content-right-side {
+.content-right-side,
+.content-left-side {
   justify-content: flex-end;
 }
 
 .content-left-side {
-  justify-content: flex-end;
   align-items: start;
 }
 
@@ -134,10 +135,7 @@
     border-radius: 3px;
   }
 
-  .button-meduim {
-    max-width: 100%;
-  }
-
+  .button-meduim,
   .button-large {
     max-width: 100%;
   }

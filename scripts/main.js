@@ -1,9 +1,10 @@
-import keyboardLayoutEnglish from './data/keyboard-values-en.js';
-import createPageStructure from './data/page-structure.js';
-import createKeyboard from './data/create-keyboard.js';
+import keyboardLayoutEnglish from './modules/keyboard-in-en.js';
+import keyboardLayoutUkraine from './modules/keyboard-in-ua.js';
+import createPageStructure from './modules/page-structure.js';
+import createKeyboard from './modules/create-keyboard.js';
 
 document.addEventListener('click', function (event) {
-  console.log(event.target.getAttribute('data-id'));
+  // console.log(event.target.getAttribute('data-id'));
 });
 
 // document.addEventListener('keyup', function (event) {
@@ -17,5 +18,5 @@ console.log(keyboardLayoutEnglish);
 
 (function init() {
   createPageStructure();
-  createKeyboard(keyboardLayoutEnglish);
+  createKeyboard(keyboardLayoutUkraine);
 })();
