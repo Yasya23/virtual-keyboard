@@ -69,10 +69,7 @@ const keyboardLayoutEnglish = [
     ' ',
     'Alt',
     'Control',
-    'ArrowLeft',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowRight',
+    ['ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'],
   ],
 ];
 

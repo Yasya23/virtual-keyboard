@@ -108,7 +108,8 @@
 }
 
 .content-left-side {
-  justify-content: flex-start;
+  justify-content: flex-end;
+  align-items: start;
 }
 
 @media (max-width: 500px) {
