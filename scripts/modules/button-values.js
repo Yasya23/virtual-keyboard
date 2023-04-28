@@ -19,8 +19,8 @@ function simpleButton(value, index) {
   if (value === 'Tab') return ['&#x21e5;', 'Tab', classes[2]];
   if (value === 'CapsLock') return ['&#x21ea;', 'CapsLock', classes[2]];
   if (value === 'Enter') return ['&#x21a9;', 'Enter', classes[1]];
-  if (value === 'Shift')
-    return ['&#x21e7;', 'Shift', index < 2 ? classes[2] : classes[1]];
+  if (value === 'ShiftLeft' || value === 'ShiftRight')
+    return ['&#x21e7;', value, index < 2 ? classes[2] : classes[1]];
   if (value === 'EN' || value === 'UA') return [value, 'Fn', classes[0]];
   if (value === ' ') return [' ', ' ', classes[3]];
   if (value === ' ') return [' ', ' ', classes[3]];
@@ -41,10 +41,10 @@ function buttonWithTwoValues(value) {
   if (value[1] === 'Control') {
     return [value[0], 'control', value[1], value[1], classes[0], classes[6]];
   }
-  if (value[1] === 'Alt') {
+  if (value[1] === 'AltLeft' || value[1] === 'AltRight') {
     return [value[0], 'option', value[1], value[1], classes[0], classes[6]];
   }
-  if (value[1] === 'Meta') {
+  if (value[1] === 'MetaLeft' || value[1] === 'MetaRight') {
     return [value[0], 'command', value[1], value[1], classes[0], classes[6]];
   }
   return [value[0], value[1], value[1], value[0], classes[0]];
