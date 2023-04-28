@@ -8,9 +8,9 @@ if (!language) language = keyboardLayoutEnglish;
 
 document.addEventListener('click', function (event) {
   const id = event.target.getAttribute('data-id');
+  console.log(id);
   if (id === 'Fn') {
     language = changeLanguage(language);
-    console.log(language);
     init(language);
   }
 });
@@ -27,7 +27,7 @@ document.addEventListener('keydown', function (event) {
 });
 
 document.addEventListener('keyup', function (event) {
-  pressedBtn.delete(event.key); // remove the key code or key name from the Set
+  pressedBtn.delete(event.key);
 });
 
 function init(lang) {

@@ -21,7 +21,7 @@ function simpleButton(value, index) {
   if (value === 'Enter') return ['&#x21a9;', 'Enter', classes[1]];
   if (value === 'Shift')
     return ['&#x21e7;', 'Shift', index < 2 ? classes[2] : classes[1]];
-  if (value === 'Fn') return [value, 'Fn', classes[0]];
+  if (value === 'EN' || value === 'UA') return [value, 'Fn', classes[0]];
   if (value === ' ') return [' ', ' ', classes[3]];
   if (value === ' ') return [' ', ' ', classes[3]];
 
