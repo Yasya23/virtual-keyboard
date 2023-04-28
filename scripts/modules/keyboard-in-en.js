@@ -62,7 +62,7 @@ const keyboardLayoutEnglish = [
     'Shift',
   ],
   [
-    'Fn',
+    'EN',
     ['^', 'Control'],
     ['&#x2325;', 'Alt'],
     ['&#x2318;', 'Meta'],

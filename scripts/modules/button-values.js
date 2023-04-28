@@ -21,7 +21,7 @@ function simpleButton(value, index) {
   if (value === 'Enter') return ['&#x21a9;', 'Enter', classes[1]];
   if (value === 'Shift')
     return ['&#x21e7;', 'Shift', index < 2 ? classes[2] : classes[1]];
-  if (value === 'Fn') return ['Fn', 'Fn', classes[0]];
+  if (value === 'Fn') return [value, 'Fn', classes[0]];
   if (value === ' ') return [' ', ' ', classes[3]];
   if (value === ' ') return [' ', ' ', classes[3]];
 
@@ -34,7 +34,6 @@ function arrowsButtons() {
   const up = [arrows[1], 'ArrowUp', classes[5]];
   const down = [arrows[2], 'ArrowDown', classes[4]];
   const right = [arrows[3], 'ArrowRight', classes[4]];
-  console.log([left, up, down, right]);
   return [left, up, down, right];
 }
 
