@@ -2,12 +2,15 @@ import keyboardLayoutEnglish from './modules/keyboard-in-en.js';
 import createPageStructure from './modules/page-structure.js';
 import createKeyboard from './modules/create-keyboard.js';
 import changeLanguage from './modules/buttons-actions.js';
-let language = keyboardLayoutEnglish;
+
+let language = JSON.parse(localStorage.getItem('keyboardLanguage'));
+if (!language) language = keyboardLayoutEnglish;
 
 document.addEventListener('click', function (event) {
   const id = event.target.getAttribute('data-id');
   if (id === 'Fn') {
     language = changeLanguage(language);
+    console.log(language);
     init(language);
   }
 });
@@ -21,14 +24,6 @@ document.addEventListener('keydown', function (event) {
     language = changeLanguage(language);
     init(language);
   }
-  // if (event.key === 'Control' && event.key === 'Alt') {
-  //   console.log(1);
-  // }
-  // document.querySelectorAll('.button').forEach((el) => {
-  //   if (el.getAttribute('data-id') === event.key) {
-  //     console.log(event.key, el.getAttribute('data-id'));
-  //   }
-  // });
 });
 
 document.addEventListener('keyup', function (event) {
