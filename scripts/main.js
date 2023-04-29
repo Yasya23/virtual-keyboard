@@ -4,12 +4,12 @@ import showTextInTextearea from './modules/textarea-actions.js';
 import { language, changeLanguage } from './modules/change-lang.js';
 import { buttons } from './modules/keyboard-in-en.js';
 
-console.log(language);
+// console.log(language);
 
 let pressedBtn = [];
 let isShift = false;
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', (event) => {
   const id = event.target.getAttribute('data-id');
   if (id) {
     if (!buttons.includes(id)) {
@@ -24,8 +24,23 @@ document.addEventListener('click', function (event) {
   }
 });
 
-document.addEventListener('keydown', function (event) {
-  console.log(event.key);
+function toggleClassWhenShiftPress() {
+  document
+    .querySelectorAll('.button-value')
+    .forEach((el) => el.classList.toggle('button-value-none'));
+  document
+    .querySelectorAll('.button-letters')
+    .forEach((el) => el.classList.toggle('uppercase'));
+}
+
+function highlighteButtons() {
+  document.querySelectorAll('.button').forEach((el) => {
+    const element = el.getAttribute('data-id');
+    if (element === pressedBtn[0] || element === pressedBtn[1]) el.classList.add('button-press');
+  });
+}
+
+document.addEventListener('keydown', (event) => {
   // event.preventDefault();
 
   if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
@@ -40,26 +55,14 @@ document.addEventListener('keydown', function (event) {
     pressedBtn.push(event.key);
   }
 
-  if (
-    pressedBtn.includes('Control') &&
-    (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
-  ) {
+  if (pressedBtn.includes('Control') && (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))) {
     createKeyboard(changeLanguage(language));
   }
 
   highlighteButtons();
 });
 
-function highlighteButtons() {
-  document.querySelectorAll('.button').forEach((el) => {
-    const element =
-      el.getAttribute('data-id') === pressedBtn[0] ||
-      el.getAttribute('data-id') === pressedBtn[1];
-    if (element) el.classList.add('button-press');
-  });
-}
-
-document.addEventListener('keyup', function (event) {
+document.addEventListener('keyup', (event) => {
   pressedBtn = [];
   document
     .querySelectorAll('.button-press')
@@ -70,18 +73,11 @@ document.addEventListener('keyup', function (event) {
   }
 });
 
-function toggleClassWhenShiftPress() {
-  document
-    .querySelectorAll('.button-value')
-    .forEach((el) => el.classList.toggle('button-value-none'));
-  document
-    .querySelectorAll('.button-letters')
-    .forEach((el) => el.classList.toggle('uppercase'));
-}
-
 function init(lang) {
   createPageStructure();
   createKeyboard(lang);
 }
 
 init(language);
+
+export default { isShift };

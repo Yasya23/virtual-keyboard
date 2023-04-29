@@ -14,10 +14,20 @@ const classes = [
   'button button-letters',
 ];
 
-function addButtonValues(value, index, buttonType) {
-  if (buttonType === 'simpleButton') return simpleButton(value, index);
-  if (buttonType === 'arrows') return arrowsButtons();
-  if (buttonType === 'buttonWithTwoValues') return buttonWithTwoValues(value);
+function createUaSimpleButtons(value) {
+  return (keys[value] || [value, value]).concat(classes[9]);
+}
+
+function createUaButtonWithTwoValues(value) {
+  return [
+    value[0],
+    value[1],
+    value[1],
+    value[0],
+    classes[0],
+    classes[7],
+    classes[8],
+  ];
 }
 
 function simpleButton(value, index) {
@@ -27,8 +37,7 @@ function simpleButton(value, index) {
   if (value === 'Tab') return ['&#x21e5;', 'Tab', classes[2]];
   if (value === 'CapsLock') return ['&#x21ea;', 'CapsLock', classes[2]];
   if (value === 'Enter') return ['&#x21a9;', 'Enter', classes[1]];
-  if (value === 'ShiftLeft' || value === 'ShiftRight')
-    return ['&#x21e7;', value, index < 2 ? classes[2] : classes[1]];
+  if (value === 'ShiftLeft' || value === 'ShiftRight') return ['&#x21e7;', value, index < 2 ? classes[2] : classes[1]];
   if (value === 'EN' || value === 'UA') return [value, 'Fn', classes[0]];
   if (value === ' ') return [' ', ' ', classes[3]];
 
@@ -60,35 +69,16 @@ function buttonWithTwoValues(value) {
       return [value[0], 'command', value[1], value[1], classes[0], classes[6]];
     default:
       return keyboardLanguage === 'En'
-        ? [
-            value[0],
-            value[1],
-            value[1],
-            value[0],
-            classes[0],
-            classes[7],
-            classes[8],
-          ]
+        ? [value[0], value[1], value[1], value[0], classes[0], classes[7], classes[8]]
         : createUaButtonWithTwoValues(value);
   }
 }
 
-console.log(classes[8], classes[9]);
-
-function createUaSimpleButtons(value) {
-  return (keys[value] || [value, value]).concat(classes[9]);
+function addButtonValues(value, index, buttonType) {
+  let result;
+  if (buttonType === 'simpleButton') result = simpleButton(value, index);
+  if (buttonType === 'arrows')result = arrowsButtons();
+  if (buttonType === 'buttonWithTwoValues') result = buttonWithTwoValues(value);
+  return result;
 }
-
-function createUaButtonWithTwoValues(value) {
-  return [
-    value[0],
-    value[1],
-    value[1],
-    value[0],
-    classes[0],
-    classes[7],
-    classes[8],
-  ];
-}
-
 export default addButtonValues;

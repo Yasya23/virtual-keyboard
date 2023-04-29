@@ -6,10 +6,8 @@ let language;
 if (!language) language = keyboardLayoutEnglish;
 
 function changeLanguage(currentLanguage) {
-  const updateLanguage =
-    currentLanguage === keyboardLayoutEnglish
-      ? keyboardLayoutUkraine
-      : keyboardLayoutEnglish;
+  const updateLanguage = currentLanguage
+  === keyboardLayoutEnglish ? keyboardLayoutUkraine : keyboardLayoutEnglish;
   // localStorage.setItem('keyboardLanguage', JSON.stringify(updateLanguage));
   language = updateLanguage;
   return updateLanguage;
