@@ -8,7 +8,8 @@ class Button {
     this.shiftId = null;
     this.index = index;
     this.class = null;
-    this.extraClass = null;
+    this.extraClassOne = null;
+    this.extraClassTwo = null;
   }
 
   checkValue() {
@@ -36,7 +37,8 @@ class Button {
         this.id,
         this.shiftId,
         this.class,
-        this.extraClass,
+        this.extraClassOne,
+        this.extraClassTwo,
       ] = buttonsValues;
       return this.buttonWithTwoValues();
     }
@@ -47,9 +49,10 @@ class Button {
   }
 
   buttonWithTwoValues() {
+    console.log(this.extraClassOne, this.extraClassTwo);
     return ` <div class="${this.class}" data-id="${this.id}" data-shift-id="${this.shiftId}">
-      <div>${this.value}</div>
-      <div class=${this.extraClass}>${this.valueTwo}</div>
+      <div class="${this.extraClassTwo}">${this.value}</div>
+      <div class="${this.extraClassOne}">${this.valueTwo}</div>
     </div>`;
   }
 

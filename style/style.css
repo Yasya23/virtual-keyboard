@@ -89,6 +89,10 @@
   visibility: visible;
 }
 
+.button-value-none {
+  display: none;
+}
+
 .arrows {
   display: flex;
   align-items: flex-end;
@@ -117,6 +121,10 @@
 
 .content-left-side {
   align-items: start;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 @media (max-width: 500px) {

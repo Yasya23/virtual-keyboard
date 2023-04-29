@@ -9,6 +9,9 @@ const classes = [
   'button button-arrow',
   'button button-arrow button-arrow-top',
   'button-text',
+  'button-value',
+  'button-value button-value-none',
+  'button button-letters',
 ];
 
 function addButtonValues(value, index, buttonType) {
@@ -30,7 +33,7 @@ function simpleButton(value, index) {
   if (value === ' ') return [' ', ' ', classes[3]];
 
   return keyboardLanguage === 'En'
-    ? [value, value, classes[0]]
+    ? [value, value, classes[9]]
     : createUaSimpleButtons(value);
 }
 
@@ -57,17 +60,35 @@ function buttonWithTwoValues(value) {
       return [value[0], 'command', value[1], value[1], classes[0], classes[6]];
     default:
       return keyboardLanguage === 'En'
-        ? [value[0], value[1], value[1], value[0], classes[0]]
+        ? [
+            value[0],
+            value[1],
+            value[1],
+            value[0],
+            classes[0],
+            classes[7],
+            classes[8],
+          ]
         : createUaButtonWithTwoValues(value);
   }
 }
 
+console.log(classes[8], classes[9]);
+
 function createUaSimpleButtons(value) {
-  return (keys[value] || [value, value]).concat(classes[0]);
+  return (keys[value] || [value, value]).concat(classes[9]);
 }
 
 function createUaButtonWithTwoValues(value) {
-  return [value[0], value[1], value[1], value[0], classes[0]];
+  return [
+    value[0],
+    value[1],
+    value[1],
+    value[0],
+    classes[0],
+    classes[7],
+    classes[8],
+  ];
 }
 
 export default addButtonValues;

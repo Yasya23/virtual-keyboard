@@ -7,6 +7,7 @@ import { buttons } from './modules/keyboard-in-en.js';
 console.log(language);
 
 let pressedBtn = [];
+let isShift = false;
 
 document.addEventListener('click', function (event) {
   const id = event.target.getAttribute('data-id');
@@ -24,9 +25,14 @@ document.addEventListener('click', function (event) {
 });
 
 document.addEventListener('keydown', function (event) {
+  console.log(event.key);
   // event.preventDefault();
 
   if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
+  if (event.key === 'Shift') {
+    isShift = true;
+    toggleClassWhenShiftPress();
+  }
 
   if (event.key === 'Shift' || event.key === 'Alt') {
     pressedBtn.push(event.code);
@@ -53,12 +59,25 @@ function highlighteButtons() {
   });
 }
 
-document.addEventListener('keyup', function () {
+document.addEventListener('keyup', function (event) {
   pressedBtn = [];
   document
     .querySelectorAll('.button-press')
     .forEach((el) => el.classList.remove('button-press'));
+  if (event.key === 'Shift' && isShift === true) {
+    isShift = false;
+    toggleClassWhenShiftPress();
+  }
 });
+
+function toggleClassWhenShiftPress() {
+  document
+    .querySelectorAll('.button-value')
+    .forEach((el) => el.classList.toggle('button-value-none'));
+  document
+    .querySelectorAll('.button-letters')
+    .forEach((el) => el.classList.toggle('uppercase'));
+}
 
 function init(lang) {
   createPageStructure();
