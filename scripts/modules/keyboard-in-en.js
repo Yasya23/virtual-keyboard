@@ -73,4 +73,49 @@ const keyboardLayoutEnglish = [
   ],
 ];
 
-export default keyboardLayoutEnglish;
+const keysBtnWithTwoValues = [
+  '!',
+  '1',
+  '@',
+  '2',
+  '#',
+  '3',
+  '$',
+  '4',
+  '%',
+  '5',
+  ':',
+  '6',
+  '&',
+  '7',
+  '*',
+  '8',
+  '(',
+  '9',
+  ')',
+  '0',
+  '_',
+  '-',
+  '+',
+  '=',
+  '|',
+  '\\',
+];
+
+const buttons = [
+  'Alt',
+  'Shift',
+  'Control',
+  'Tab',
+  'Meta',
+  'CapsLock',
+  'Enter',
+  'Backspace',
+  'ArrowLeft',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'Fn',
+];
+
+export { keyboardLayoutEnglish, keysBtnWithTwoValues, buttons };

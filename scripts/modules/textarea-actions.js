@@ -1,4 +1,5 @@
 import { checkLanguage } from './change-lang.js';
+import { keysBtnWithTwoValues } from './keyboard-in-en.js';
 
 function showTextInTextearea(event, key) {
   const keyboardLanguage = checkLanguage();
@@ -6,14 +7,14 @@ function showTextInTextearea(event, key) {
   const textarea = document.querySelector('textarea');
   if (key !== 'Shift') {
     event.preventDefault();
-    if (keyboardLanguage === 'Ua') {
-      const text = document.querySelector(`[data-id="${key}"]`);
-      insertTextAtCursor(textarea, text.textContent);
+    if (keyboardLanguage === 'Ua' && !keysBtnWithTwoValues.includes(key)) {
+      const element = document.querySelector(`[data-id="${key}"]`);
+      if (element) insertTextAtCursor(textarea, element.textContent);
     } else {
       insertTextAtCursor(textarea, key);
     }
+    textarea.focus();
   }
-  textarea.focus();
 }
 
 function insertTextAtCursor(textarea, newText) {

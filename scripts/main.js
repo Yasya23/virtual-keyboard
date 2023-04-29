@@ -2,23 +2,9 @@ import createPageStructure from './modules/page-structure.js';
 import createKeyboard from './modules/create-keyboard.js';
 import showTextInTextearea from './modules/textarea-actions.js';
 import { language, changeLanguage } from './modules/change-lang.js';
+import { buttons } from './modules/keyboard-in-en.js';
 
 console.log(language);
-
-const buttons = [
-  'Alt',
-  'Shift',
-  'Control',
-  'Tab',
-  'Meta',
-  'CapsLock',
-  'Enter',
-  'Backspace',
-  'ArrowLeft',
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowRight',
-];
 
 let pressedBtn = [];
 
