@@ -109,9 +109,9 @@
 }
 
 .button-press {
-  color: #fddbc9;
   background-color: #796161;
-  box-shadow: 1px 1px 2px 0px #735749;
+  box-shadow: 1px 1px 2px 1px #302723;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .content-right-side,

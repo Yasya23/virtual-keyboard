@@ -18,18 +18,18 @@ function insertTextAtCursor(textareaElement, text) {
   );
 }
 
-function keyboardInUkraine(key, lowerecaseKey, textarea) {
-  // console.log(key);
+// function keyboardInUkraine(key, lowerecaseKey, textarea) {
+//   // console.log(key);
 
-  if (!keysEn.includes(key)) {
-    const element = document.querySelector(`[data-id='${lowerecaseKey}']`);
-    insertTextAtCursor(textarea, element.textContent);
-  } else if (keysEn.includes(key)) {
-    const keyNumber = keysEn.indexOf(key);
-    return insertTextAtCursor(textarea, keysUa[keyNumber]);
-  }
-  // return insertTextAtCursor(textarea, keysUa[lowerecaseKey]);
-}
+//   if (!keysEn.includes(key)) {
+//     const element = document.querySelector(`[data-id='${lowerecaseKey}']`);
+//     insertTextAtCursor(textarea, element.textContent);
+//   } else if (keysEn.includes(key)) {
+//     const keyNumber = keysEn.indexOf(key);
+//     return insertTextAtCursor(textarea, keysUa[keyNumber]);
+//   }
+//   // return insertTextAtCursor(textarea, keysUa[lowerecaseKey]);
+// }
 
 function showTextInTextearea(event, key) {
   const textarea = document.querySelector('textarea');
@@ -38,11 +38,11 @@ function showTextInTextearea(event, key) {
   if (key) {
     event.preventDefault();
     const lowerecaseKey = returnIsShift() ? key.toLowerCase() : key;
-    if (keyboardLanguage === 'Ua') {
-      keyboardInUkraine(key, lowerecaseKey, textarea);
-    } else {
+    // if (keyboardLanguage === 'Ua') {
+    //   keyboardInUkraine(key, lowerecaseKey, textarea);
+    // } else {
       insertTextAtCursor(textarea, key);
-    }
+    // }
     textarea.focus();
   }
 }

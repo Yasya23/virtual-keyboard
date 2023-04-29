@@ -7,7 +7,7 @@ import { returnIsShift, updateIsShift } from './modules/buttons-actions.js';
 
 // console.log(language);
 
-const pressedBtn = [];
+let pressedBtn = [];
 
 document.addEventListener('click', (event) => {
   const id = event.target.getAttribute('data-id');
@@ -36,7 +36,9 @@ function toggleClassWhenShiftPress() {
 function highlighteButtons() {
   document.querySelectorAll('.button').forEach((el) => {
     const element = el.getAttribute('data-id');
-    if (element === pressedBtn[0] || element === pressedBtn[1]) el.classList.add('button-press');
+    if (element === pressedBtn[0] || element === pressedBtn[1]) {
+      el.classList.add('button-press');
+    }
   });
 }
 
@@ -63,6 +65,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
+  pressedBtn = [];
   document.querySelectorAll('.button-press').forEach((el) => el.classList.remove('button-press'));
   if (event.key === 'Shift' && returnIsShift() === true) {
     updateIsShift(false);
