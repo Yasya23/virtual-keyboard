@@ -1,13 +1,13 @@
 import createPageStructure from './modules/page-structure.js';
 import createKeyboard from './modules/create-keyboard.js';
 import showTextInTextearea from './modules/textarea-actions.js';
-import { language, changeLanguage } from './modules/change-lang.js';
+import { returnLanguage, changeLanguage } from './modules/change-lang.js';
 import { buttons } from './modules/keyboard-in-en.js';
+import { returnIsShift, updateIsShift } from './modules/buttons-actions.js';
 
 // console.log(language);
 
-let pressedBtn = [];
-let isShift = false;
+const pressedBtn = [];
 
 document.addEventListener('click', (event) => {
   const id = event.target.getAttribute('data-id');
@@ -19,7 +19,7 @@ document.addEventListener('click', (event) => {
     }
 
     if (id === 'Fn') {
-      createKeyboard(changeLanguage(language));
+      createKeyboard(changeLanguage(returnLanguage()));
     }
   }
 });
@@ -45,7 +45,7 @@ document.addEventListener('keydown', (event) => {
 
   if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
   if (event.key === 'Shift') {
-    isShift = true;
+    updateIsShift(true);
     toggleClassWhenShiftPress();
   }
 
@@ -56,19 +56,16 @@ document.addEventListener('keydown', (event) => {
   }
 
   if (pressedBtn.includes('Control') && (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))) {
-    createKeyboard(changeLanguage(language));
+    createKeyboard(changeLanguage(returnLanguage()));
   }
 
   highlighteButtons();
 });
 
 document.addEventListener('keyup', (event) => {
-  pressedBtn = [];
-  document
-    .querySelectorAll('.button-press')
-    .forEach((el) => el.classList.remove('button-press'));
-  if (event.key === 'Shift' && isShift === true) {
-    isShift = false;
+  document.querySelectorAll('.button-press').forEach((el) => el.classList.remove('button-press'));
+  if (event.key === 'Shift' && returnIsShift() === true) {
+    updateIsShift(false);
     toggleClassWhenShiftPress();
   }
 });
@@ -78,6 +75,4 @@ function init(lang) {
   createKeyboard(lang);
 }
 
-init(language);
-
-export default { isShift };
+init(returnLanguage());

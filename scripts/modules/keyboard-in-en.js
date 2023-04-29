@@ -89,4 +89,28 @@ const buttons = [
   'Fn',
 ];
 
-export { keyboardLayoutEnglish, buttons };
+const keysEn = [
+  '!',
+  '@',
+  '#',
+  '$',
+  '%',
+  '^',
+  '&',
+  '*',
+  '(',
+  ')',
+  '_',
+  '+',
+  '|',
+  '?',
+  '>',
+  '<',
+  '~',
+  '{',
+  '}',
+  '"',
+  ':',
+];
+
+export { keyboardLayoutEnglish, buttons, keysEn };

@@ -1,9 +1,12 @@
 import { checkLanguage } from './change-lang.js';
-import isShift from '../main.js';
+import { returnIsShift } from './buttons-actions.js';
+import { keysEn } from './keyboard-in-en.js';
+import { keysUa } from './keyboard-in-ua.js';
 
 function insertTextAtCursor(textareaElement, text) {
   let newText = text;
   const textarea = textareaElement;
+  const isShift = returnIsShift();
   if (isShift) newText = newText.toUpperCase();
   const { selectionStart: cursorPosition, value: currentValue } = textarea;
   const prefix = currentValue.slice(0, cursorPosition);
@@ -17,61 +20,15 @@ function insertTextAtCursor(textareaElement, text) {
 
 function keyboardInUkraine(key, lowerecaseKey, textarea) {
   // console.log(key);
-  const keysEn = [
-    '!',
-    '@',
-    '#',
-    '$',
-    '%',
-    '^',
-    '&',
-    '*',
-    '(',
-    ')',
-    '_',
-    '+',
-    '|',
-    '?',
-    '>',
-    '<',
-    '~',
-    '{',
-    '}',
-    '"',
-    ':',
-  ];
-  const keysUa = [
-    '!',
-    '"',
-    '№',
-    ';',
-    '%',
-    ':',
-    '?',
-    '*',
-    '(',
-    ')',
-    '_',
-    '+',
-    '₴',
-    '.',
-    'ю',
-    'б',
-    'ґ',
-    'х',
-    'ї',
-    'є',
-    'ж',
-  ];
 
   if (!keysEn.includes(key)) {
-    // console.log(1);
-    // const element = document.querySelector(`[data-id='${lowerecaseKey}']`);
-    // insertTextAtCursor(textarea, element.textContent);
+    const element = document.querySelector(`[data-id='${lowerecaseKey}']`);
+    insertTextAtCursor(textarea, element.textContent);
   } else if (keysEn.includes(key)) {
     const keyNumber = keysEn.indexOf(key);
     return insertTextAtCursor(textarea, keysUa[keyNumber]);
   }
+  // return insertTextAtCursor(textarea, keysUa[lowerecaseKey]);
 }
 
 function showTextInTextearea(event, key) {
@@ -80,7 +37,7 @@ function showTextInTextearea(event, key) {
 
   if (key) {
     event.preventDefault();
-    const lowerecaseKey = isShift ? key.toLowerCase() : key;
+    const lowerecaseKey = returnIsShift() ? key.toLowerCase() : key;
     if (keyboardLanguage === 'Ua') {
       keyboardInUkraine(key, lowerecaseKey, textarea);
     } else {

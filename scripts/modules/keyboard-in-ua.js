@@ -100,4 +100,28 @@ const keys = {
   '.': ['.', '/'],
 };
 
-export { keyboardLayoutUkraine, keys };
+const keysUa = [
+  '!',
+  '"',
+  '№',
+  ';',
+  '%',
+  ':',
+  '?',
+  '*',
+  '(',
+  ')',
+  '_',
+  '+',
+  '₴',
+  '.',
+  'ю',
+  'б',
+  'ґ',
+  'х',
+  'ї',
+  'є',
+  'ж',
+];
+
+export { keyboardLayoutUkraine, keys, keysUa };
