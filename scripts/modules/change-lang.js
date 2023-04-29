@@ -12,7 +12,14 @@ function changeLanguage(currentLanguage) {
       : keyboardLayoutEnglish;
   // localStorage.setItem('keyboardLanguage', JSON.stringify(updateLanguage));
   language = updateLanguage;
+  console.log(language);
+
   return updateLanguage;
 }
 
-export { language, changeLanguage };
+function checkLanguage() {
+  const keyboardLanguage = Array.isArray(language[0][0]) ? 'En' : 'Ua';
+  return keyboardLanguage;
+}
+
+export { language, changeLanguage, checkLanguage };

@@ -35,6 +35,7 @@ const keyboardLayoutUkraine = [
   [
     'ShiftLeft',
     'ґ',
+    'я',
     'ч',
     'с',
     'м',
@@ -43,7 +44,7 @@ const keyboardLayoutUkraine = [
     'ь',
     'б',
     'ю',
-    ',',
+
     '.',
     'ShiftRight',
   ],

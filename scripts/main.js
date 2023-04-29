@@ -1,17 +1,47 @@
 import createPageStructure from './modules/page-structure.js';
 import createKeyboard from './modules/create-keyboard.js';
+import showTextInTextearea from './modules/textarea-actions.js';
 import { language, changeLanguage } from './modules/change-lang.js';
 
-document.addEventListener('click', function (event) {
-  const id = event.target.getAttribute('data-id');
-  if (id === 'Fn') {
-    init(changeLanguage(language));
-  }
-});
+console.log(language);
+
+const buttons = [
+  'Alt',
+  'Shift',
+  'Control',
+  'Tab',
+  'Meta',
+  'CapsLock',
+  'Enter',
+  'Backspace',
+  'ArrowLeft',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+];
 
 let pressedBtn = [];
 
+document.addEventListener('click', function (event) {
+  const id = event.target.getAttribute('data-id');
+  if (id) {
+    if (!buttons.includes(id)) {
+      showTextInTextearea(event, id);
+      pressedBtn.push(id);
+      // document.querySelector(`${id}`).classList.add('button-press');
+    }
+
+    if (id === 'Fn') {
+      createKeyboard(changeLanguage(language));
+    }
+  }
+});
+
 document.addEventListener('keydown', function (event) {
+  // event.preventDefault();
+
+  if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
+
   if (event.key === 'Shift' || event.key === 'Alt') {
     pressedBtn.push(event.code);
   } else {
@@ -22,12 +52,10 @@ document.addEventListener('keydown', function (event) {
     pressedBtn.includes('Control') &&
     (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
   ) {
-    init(changeLanguage(language));
+    createKeyboard(changeLanguage(language));
   }
 
   highlighteButtons();
-
-  console.log(pressedBtn);
 });
 
 function highlighteButtons() {
@@ -39,7 +67,7 @@ function highlighteButtons() {
   });
 }
 
-document.addEventListener('keyup', function (event) {
+document.addEventListener('keyup', function () {
   pressedBtn = [];
   document
     .querySelectorAll('.button-press')
