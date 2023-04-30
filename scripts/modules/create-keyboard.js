@@ -1,12 +1,10 @@
 import addButtonValues from './button-values.js';
 
 class Button {
-  constructor(value, index) {
+  constructor(value) {
     this.value = value;
     this.valueTwo = null;
     this.id = value;
-    this.shiftId = null;
-    this.index = index;
     this.class = null;
     this.extraClassOne = null;
     this.extraClassTwo = null;
@@ -58,13 +56,13 @@ class Button {
   }
 }
 
-function createButton(buttonValue, index) {
-  const newButton = new Button(buttonValue, index);
+function createButton(buttonValue) {
+  const newButton = new Button(buttonValue);
   return newButton.checkValue();
 }
 
 function createRow(row) {
-  const rowArray = row.map((button, index) => createButton(button, index))
+  const rowArray = row.map((button) => createButton(button))
     .join('');
   return `<div class="row">${rowArray}</div>`;
 }

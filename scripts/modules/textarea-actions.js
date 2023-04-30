@@ -1,10 +1,9 @@
-import { returnIsShift } from './buttons-actions.js';
+import { returnIsCapsLock, returnIsShift } from './is-buttons.js';
 
 function insertTextAtCursor(textareaElement, text) {
   let newText = text;
   const textarea = textareaElement;
-  const isShift = returnIsShift();
-  if (isShift) newText = newText.toUpperCase();
+  if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
   const { selectionStart: cursorPosition, value: currentValue } = textarea;
   const prefix = currentValue.slice(0, cursorPosition);
   const suffix = currentValue.slice(cursorPosition);
