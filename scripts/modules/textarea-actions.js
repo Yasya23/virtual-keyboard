@@ -16,7 +16,7 @@ function changeTextAtCursor(text) {
 
 function actionsWithButtonsTextarea(key) {
   const textarea = document.querySelector('.textarea');
-  const { selectionStart, selectionEnd, value } = textarea;
+  const { selectionStart, value } = textarea;
   if (key === 'Space') changeTextAtCursor(' ');
   if (key === 'Enter') changeTextAtCursor('\n');
   if (key === 'Backspace') {
@@ -42,7 +42,6 @@ function actionsWithButtonsTextarea(key) {
   }
   textarea.focus();
 }
-
 
 function showTextInTextearea(event, key) {
   const textarea = document.querySelector('.textarea');
