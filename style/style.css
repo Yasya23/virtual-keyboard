@@ -70,9 +70,10 @@
   padding: 2px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  user-select: none;
 }
 
-.button:hover{
+.button:hover {
   background-color: #3e3e41;
 }
 
@@ -113,7 +114,8 @@
   margin-bottom: 2px;
 }
 
-.button-press {
+.button-press,
+.button:active {
   background-color: #796161;
   box-shadow: 1px 1px 2px 1px #302723;
   transition: box-shadow 0.2s ease-in-out;

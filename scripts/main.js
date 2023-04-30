@@ -11,6 +11,7 @@ let pressedBtn = [];
 
 document.addEventListener('click', (event) => {
   const id = event.target.getAttribute('data-id');
+  // console.log(id);
   if (id) {
     if (!buttons.includes(id)) {
       showTextInTextearea(event, id);
@@ -42,8 +43,12 @@ function highlighteButtons() {
   });
 }
 
+document
+  .querySelectorAll('.button')
+  .forEach((el) => console.log(el.getAttribute('data-id')));
+
 document.addEventListener('keydown', (event) => {
-  // event.preventDefault();
+  event.preventDefault();
 
   if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
   if (event.key === 'Shift') {
@@ -57,7 +62,10 @@ document.addEventListener('keydown', (event) => {
     pressedBtn.push(event.key);
   }
 
-  if (pressedBtn.includes('Control') && (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))) {
+  if (
+    pressedBtn.includes('Control') &&
+    (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
+  ) {
     createKeyboard(changeLanguage(returnLanguage()));
   }
 
@@ -65,12 +73,15 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
-  pressedBtn = [];
-  document.querySelectorAll('.button-press').forEach((el) => el.classList.remove('button-press'));
-  if (event.key === 'Shift' && returnIsShift() === true) {
-    updateIsShift(false);
-    toggleClassWhenShiftPress();
-  }
+  console.log(event.code);
+  // pressedBtn = [];
+  // document
+  //   .querySelectorAll('.button-press')
+  //   .forEach((el) => el.classList.remove('button-press'));
+  // if (event.key === 'Shift' && returnIsShift() === true) {
+  //   updateIsShift(false);
+  //   toggleClassWhenShiftPress();
+  // }
 });
 
 function init(lang) {

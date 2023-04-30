@@ -1,8 +1,8 @@
 import { keyboardLayoutUkraine } from './keyboard-in-ua.js';
 import { keyboardLayoutEnglish } from './keyboard-in-en.js';
 
-let language = JSON.parse(localStorage.getItem('keyboardLanguage'));
-// let language;
+// let language = JSON.parse(localStorage.getItem('keyboardLanguage'));
+let language;
 if (!language) language = keyboardLayoutEnglish;
 
 function changeLanguage(currentLanguage) {
