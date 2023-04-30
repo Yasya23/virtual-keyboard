@@ -1,23 +1,24 @@
 import { returnIsCapsLock, returnIsShift } from './is-buttons.js';
 
-function insertTextAtCursor(textareaElement, text) {
-  let newText = text;
-  const textarea = textareaElement;
-  if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
-  const { selectionStart: cursorPosition, value: currentValue } = textarea;
-  const prefix = currentValue.slice(0, cursorPosition);
-  const suffix = currentValue.slice(cursorPosition);
-  textarea.value = prefix + newText + suffix;
-  textarea.setSelectionRange(
-    cursorPosition + newText.length,
-    cursorPosition + newText.length,
-  );
-}
+
+// function insertTextAtCursor(textareaElement, text) {
+//   let newText = text;
+//   const textarea = textareaElement;
+//   if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
+//   const { selectionStart: cursorPosition, value: currentValue } = textarea;
+//   const prefix = currentValue.slice(0, cursorPosition);
+//   const suffix = currentValue.slice(cursorPosition);
+//   textarea.value = prefix + newText + suffix;
+//   textarea.setSelectionRange(
+//     cursorPosition + newText.length,
+//     cursorPosition + newText.length,
+//   );
+// }
 
 function showTextInTextearea(event, key) {
-  const textarea = document.querySelector('textarea');
-
+  const textarea = document.querySelector('.textarea');
   if (key) {
+    let result;
     event.preventDefault();
     const element = document.querySelector(`[data-id="${key}"]`);
     const { children } = element;
@@ -28,12 +29,19 @@ function showTextInTextearea(event, key) {
           text = child.textContent;
         }
       });
-      insertTextAtCursor(textarea, text);
+      result = text;
     } else {
-      insertTextAtCursor(textarea, element.textContent.trim());
+      result = element.textContent.trim();
     }
+    if (returnIsShift() || returnIsCapsLock()) result = result.toUpperCase();
+    textarea.value += result;
     textarea.focus();
   }
 }
 
-export default showTextInTextearea;
+function actionsWithButtonsTextarea(key) {
+  const textarea = document.querySelector('.textarea');
+  if (key === 'Space') textarea.value += ' ';
+}
+
+export { showTextInTextearea, actionsWithButtonsTextarea };

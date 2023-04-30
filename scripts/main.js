@@ -1,6 +1,6 @@
 import createPageStructure from './modules/page-structure.js';
 import createKeyboard from './modules/create-keyboard.js';
-import showTextInTextearea from './modules/textarea-actions.js';
+import { showTextInTextearea, actionsWithButtonsTextarea } from './modules/textarea-actions.js';
 import { returnLanguage, changeLanguage } from './modules/change-lang.js';
 import {
   returnIsShift, updateIsShift, returnIsCapsLock, updateIsCapsLock,
@@ -81,6 +81,9 @@ document.addEventListener('keyup', (event) => {
   if (event.key === 'CapsLock' && returnIsCapsLock()) {
     updateIsCapsLock(false);
     lettersFontCase();
+  }
+  if (event.code === 'Space') {
+    actionsWithButtonsTextarea('Space');
   }
   removeButtonshighlighte();
 });
