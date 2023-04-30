@@ -16,6 +16,7 @@ function changeTextAtCursor(text) {
 
 function actionsWithButtonsTextarea(key) {
   const textarea = document.querySelector('.textarea');
+  const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
   const { selectionStart, value } = textarea;
   if (key === 'Space') changeTextAtCursor(' ');
   if (key === 'Enter') changeTextAtCursor('\n');
@@ -37,9 +38,11 @@ function actionsWithButtonsTextarea(key) {
       selectionStart,
     );
   }
-  if (key === 'Tab') {
-    changeTextAtCursor('\t');
-  }
+  if (key === 'Tab') changeTextAtCursor('\t');
+  if (key === 'ArrowLeft') changeTextAtCursor('◀');
+  if (key === 'ArrowRight') changeTextAtCursor('▶');
+  if (key === 'ArrowUp') changeTextAtCursor('▲');
+  if (key === 'ArrowDown') changeTextAtCursor('▼');
   textarea.focus();
 }
 

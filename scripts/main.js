@@ -70,9 +70,6 @@ document.addEventListener('click', (event) => {
     if (id === 'Fn') createKeyboard(changeLanguage(returnLanguage()));
     if (id === 'CapsLock') capsLockClicked(id);
     if (buttonsTexteareaActions.includes(id)) actionsWithButtonsTextarea(id);
-    // if (id === 'Space') actionsWithButtonsTextarea('Space');
-    // if (id === 'Enter') actionsWithButtonsTextarea('Enter');
-    // if (id === 'Backspace') actionsWithButtonsTextarea('Backspace');
   }
 });
 
