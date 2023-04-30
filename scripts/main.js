@@ -5,22 +5,17 @@ import { returnLanguage, changeLanguage } from './modules/change-lang.js';
 import { returnIsShift, updateIsShift } from './modules/buttons-actions.js';
 
 // console.log(language);
-
+const buttons = ['Alt', 'Shift', 'Control', 'Tab', 'Meta', 'CapsLock', 'Enter',
+  'Backspace', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'Fn',
+];
 let pressedBtn = [];
 
 document.addEventListener('click', (event) => {
   const id = event.target.getAttribute('data-id');
   // console.log(id);
   if (id) {
-    if (!buttons.includes(id)) {
-      showTextInTextearea(event, id);
-      pressedBtn.push(id);
-      // document.querySelector(`${id}`).classList.add('button-press');
-    }
-
-    if (id === 'Fn') {
-      createKeyboard(changeLanguage(returnLanguage()));
-    }
+    pressedBtn.push(id);
+    if (id === 'Fn') createKeyboard(changeLanguage(returnLanguage()));
   }
 });
 
@@ -42,45 +37,34 @@ function highlighteButtons() {
   });
 }
 
-document
-  .querySelectorAll('.button')
-  .forEach((el) => console.log(el.getAttribute('data-id')));
-
 document.addEventListener('keydown', (event) => {
   event.preventDefault();
-
-  if (!buttons.includes(event.key)) showTextInTextearea(event, event.key);
   if (event.key === 'Shift') {
     updateIsShift(true);
     toggleClassWhenShiftPress();
   }
+  if (!buttons.includes(event.key)) showTextInTextearea(event, event.code);
 
-  if (event.key === 'Shift' || event.key === 'Alt') {
-    pressedBtn.push(event.code);
-  } else {
-    pressedBtn.push(event.key);
-  }
+  pressedBtn.push(event.code);
 
   if (
-    pressedBtn.includes('Control') &&
-    (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
+    pressedBtn.includes('ControlLeft') && (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
   ) {
     createKeyboard(changeLanguage(returnLanguage()));
   }
-
   highlighteButtons();
 });
 
 document.addEventListener('keyup', (event) => {
-  console.log(event.code);
-  // pressedBtn = [];
-  // document
-  //   .querySelectorAll('.button-press')
-  //   .forEach((el) => el.classList.remove('button-press'));
-  // if (event.key === 'Shift' && returnIsShift() === true) {
-  //   updateIsShift(false);
-  //   toggleClassWhenShiftPress();
-  // }
+  // console.log(event.code);
+  pressedBtn = [];
+  document
+    .querySelectorAll('.button-press')
+    .forEach((el) => el.classList.remove('button-press'));
+  if (event.key === 'Shift' && returnIsShift() === true) {
+    updateIsShift(false);
+    toggleClassWhenShiftPress();
+  }
 });
 
 function init(lang) {

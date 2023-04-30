@@ -70,7 +70,6 @@ function createRow(row) {
 }
 
 function createKeyboard(data) {
-  console.log(data);
   const result = data.map((row) => createRow(row)).join('');
   document.querySelector('.container').innerHTML = result;
 }

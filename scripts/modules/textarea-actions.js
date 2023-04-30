@@ -1,4 +1,3 @@
-import { checkLanguage } from './change-lang.js';
 import { returnIsShift } from './buttons-actions.js';
 
 function insertTextAtCursor(textareaElement, text) {
@@ -16,30 +15,23 @@ function insertTextAtCursor(textareaElement, text) {
   );
 }
 
-function keyboardInUkraine(key, lowerecaseKey, textarea) {
-  // console.log(key);
-
-  if (!keysEn.includes(key)) {
-    const element = document.querySelector(`[data-id='${lowerecaseKey}']`);
-    insertTextAtCursor(textarea, element.textContent);
-  } else if (keysEn.includes(key)) {
-    const keyNumber = keysEn.indexOf(key);
-    return insertTextAtCursor(textarea, keysUa[keyNumber]);
-  }
-  // return insertTextAtCursor(textarea, keysUa[lowerecaseKey]);
-}
-
 function showTextInTextearea(event, key) {
   const textarea = document.querySelector('textarea');
-  const keyboardLanguage = checkLanguage();
 
   if (key) {
     event.preventDefault();
-    const lowerecaseKey = returnIsShift() ? key.toLowerCase() : key;
-    if (keyboardLanguage === 'ао') {
-      keyboardInUkraine(key, lowerecaseKey, textarea);
+    const element = document.querySelector(`[data-id="${key}"]`);
+    const { children } = element;
+    if (children.length > 0) {
+      let text;
+      Array.from(children).forEach((child) => {
+        if (!child.classList.contains('button-value-none')) {
+          text = child.textContent;
+        }
+      });
+      insertTextAtCursor(textarea, text);
     } else {
-      insertTextAtCursor(textarea, key);
+      insertTextAtCursor(textarea, element.textContent.trim());
     }
     textarea.focus();
   }
