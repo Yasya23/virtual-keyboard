@@ -42,6 +42,10 @@ function actionsWithButtonsTextarea(key) {
   const textarea = document.querySelector('.textarea');
   if (key === 'Space') textarea.value += ' ';
   if (key === 'Enter') textarea.value += '\n';
+  if (key === 'Backspace') {
+    const removeLast = textarea.value.slice(0, -1);
+    textarea.value = removeLast;
+  }
   textarea.focus();
 }
 

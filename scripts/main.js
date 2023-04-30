@@ -71,6 +71,7 @@ document.addEventListener('click', (event) => {
     if (id === 'CapsLock') capsLockClicked(id);
     if (id === 'Space') actionsWithButtonsTextarea('Space');
     if (id === 'Enter') actionsWithButtonsTextarea('Enter');
+    if (id === 'Backspace') actionsWithButtonsTextarea('Backspace');
   }
 });
 
@@ -86,7 +87,7 @@ document.addEventListener('keyup', (event) => {
   }
   if (event.code === 'Space') actionsWithButtonsTextarea('Space');
   if (event.code === 'Enter') actionsWithButtonsTextarea('Enter');
-
+  if (event.code === 'Backspace') actionsWithButtonsTextarea('Backspace');
   removeButtonshighlighte();
 });
 
