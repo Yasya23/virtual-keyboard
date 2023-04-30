@@ -69,6 +69,8 @@ document.addEventListener('click', (event) => {
     if (!buttons.includes(id)) showTextInTextearea(event, id);
     if (id === 'Fn') createKeyboard(changeLanguage(returnLanguage()));
     if (id === 'CapsLock') capsLockClicked(id);
+    if (id === 'Space') actionsWithButtonsTextarea('Space');
+    if (id === 'Enter') actionsWithButtonsTextarea('Enter');
   }
 });
 
@@ -82,9 +84,9 @@ document.addEventListener('keyup', (event) => {
     updateIsCapsLock(false);
     lettersFontCase();
   }
-  if (event.code === 'Space') {
-    actionsWithButtonsTextarea('Space');
-  }
+  if (event.code === 'Space') actionsWithButtonsTextarea('Space');
+  if (event.code === 'Enter') actionsWithButtonsTextarea('Enter');
+
   removeButtonshighlighte();
 });
 

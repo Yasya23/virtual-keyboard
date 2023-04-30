@@ -1,6 +1,5 @@
 import { returnIsCapsLock, returnIsShift } from './is-buttons.js';
 
-
 // function insertTextAtCursor(textareaElement, text) {
 //   let newText = text;
 //   const textarea = textareaElement;
@@ -42,6 +41,8 @@ function showTextInTextearea(event, key) {
 function actionsWithButtonsTextarea(key) {
   const textarea = document.querySelector('.textarea');
   if (key === 'Space') textarea.value += ' ';
+  if (key === 'Enter') textarea.value += '\n';
+  textarea.focus();
 }
 
 export { showTextInTextearea, actionsWithButtonsTextarea };
