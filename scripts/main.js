@@ -5,7 +5,7 @@ import { returnLanguage, changeLanguage } from './modules/change-lang.js';
 import {
   returnIsShift, updateIsShift, returnIsCapsLock, updateIsCapsLock,
 } from './modules/is-buttons.js';
-import buttons from './not-show-buttons.js';
+import { buttons, buttonsTexteareaActions } from './modules/buttons.js';
 
 let pressedBtn = [];
 
@@ -69,26 +69,11 @@ document.addEventListener('click', (event) => {
     if (!buttons.includes(id)) showTextInTextearea(event, id);
     if (id === 'Fn') createKeyboard(changeLanguage(returnLanguage()));
     if (id === 'CapsLock') capsLockClicked(id);
-    if (id === 'Space') actionsWithButtonsTextarea('Space');
-    if (id === 'Enter') actionsWithButtonsTextarea('Enter');
-    if (id === 'Backspace') actionsWithButtonsTextarea('Backspace');
+    if (buttonsTexteareaActions.includes(id)) actionsWithButtonsTextarea(id);
+    // if (id === 'Space') actionsWithButtonsTextarea('Space');
+    // if (id === 'Enter') actionsWithButtonsTextarea('Enter');
+    // if (id === 'Backspace') actionsWithButtonsTextarea('Backspace');
   }
-});
-
-document.addEventListener('keyup', (event) => {
-  pressedBtn = [];
-  if (event.key === 'Shift' && returnIsShift()) {
-    updateIsShift(false);
-    toggleClassWhenShiftPress();
-  }
-  if (event.key === 'CapsLock' && returnIsCapsLock()) {
-    updateIsCapsLock(false);
-    lettersFontCase();
-  }
-  if (event.code === 'Space') actionsWithButtonsTextarea('Space');
-  if (event.code === 'Enter') actionsWithButtonsTextarea('Enter');
-  if (event.code === 'Backspace') actionsWithButtonsTextarea('Backspace');
-  removeButtonshighlighte();
 });
 
 document.addEventListener('keydown', (event) => {
@@ -103,6 +88,7 @@ document.addEventListener('keydown', (event) => {
     lettersFontCase();
   }
   if (!buttons.includes(event.key)) showTextInTextearea(event, event.code);
+  if (buttonsTexteareaActions.includes(event.code)) actionsWithButtonsTextarea(event.code);
 
   pressedBtn.push(event.code);
 
@@ -112,4 +98,17 @@ document.addEventListener('keydown', (event) => {
     createKeyboard(changeLanguage(returnLanguage()));
   }
   highlighteButtons();
+});
+
+document.addEventListener('keyup', (event) => {
+  pressedBtn = [];
+  if (event.key === 'Shift' && returnIsShift()) {
+    updateIsShift(false);
+    toggleClassWhenShiftPress();
+  }
+  if (event.key === 'CapsLock' && returnIsCapsLock()) {
+    updateIsCapsLock(false);
+    lettersFontCase();
+  }
+  removeButtonshighlighte();
 });

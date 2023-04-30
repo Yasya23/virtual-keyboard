@@ -30,6 +30,7 @@ const keyboardLayoutEnglish = [
     ['BracketLeft', '{', '['],
     ['BracketRight', '}', ']'],
     ['Backslash', '|', '\\'],
+    ['Delete', 'Del'],
   ],
   [
     ['CapsLock', '&#x21ea;'],

@@ -30,6 +30,7 @@ const keyboardLayoutUkraine = [
     ['BracketLeft', 'Х', 'х'],
     ['BracketRight', 'Ї', 'ї'],
     ['Backslash', '₴', 'ʼ'],
+    ['Delete', 'Del'],
   ],
   [
     ['CapsLock', '&#x21ea;'],

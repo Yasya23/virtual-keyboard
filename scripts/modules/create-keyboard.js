@@ -27,7 +27,7 @@ class Button {
   }
 
   simpleButton() {
-    return ` <div class="${this.class}" data-id="${this.id}">${this.value} </div>`;
+    return ` <div class="${this.class}" data-id="${this.id}">${this.value}</div>`;
   }
 
   buttonWithTwoValues() {

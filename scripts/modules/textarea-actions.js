@@ -1,23 +1,52 @@
 import { returnIsCapsLock, returnIsShift } from './is-buttons.js';
 
-// function insertTextAtCursor(textareaElement, text) {
-//   let newText = text;
-//   const textarea = textareaElement;
-//   if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
-//   const { selectionStart: cursorPosition, value: currentValue } = textarea;
-//   const prefix = currentValue.slice(0, cursorPosition);
-//   const suffix = currentValue.slice(cursorPosition);
-//   textarea.value = prefix + newText + suffix;
-//   textarea.setSelectionRange(
-//     cursorPosition + newText.length,
-//     cursorPosition + newText.length,
-//   );
-// }
+function changeTextAtCursor(text) {
+  const textarea = document.querySelector('.textarea');
+  let newText = text;
+  if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
+  const { selectionStart: cursorPosition, value: currentValue } = textarea;
+  const prefix = currentValue.slice(0, cursorPosition);
+  const suffix = currentValue.slice(cursorPosition);
+  textarea.value = prefix + newText + suffix;
+  textarea.setSelectionRange(
+    cursorPosition + newText.length,
+    cursorPosition + newText.length,
+  );
+}
+
+function actionsWithButtonsTextarea(key) {
+  const textarea = document.querySelector('.textarea');
+  const { selectionStart, selectionEnd, value } = textarea;
+  if (key === 'Space') changeTextAtCursor(' ');
+  if (key === 'Enter') changeTextAtCursor('\n');
+  if (key === 'Backspace') {
+    const prefix = value.slice(0, selectionStart - 1);
+    const suffix = value.slice(selectionStart);
+    textarea.value = prefix + suffix;
+    textarea.setSelectionRange(
+      selectionStart - 1,
+      selectionStart - 1,
+    );
+  }
+  if (key === 'Delete') {
+    const prefix = value.slice(0, selectionStart);
+    const suffix = value.slice(selectionStart + 1);
+    textarea.value = prefix + suffix;
+    textarea.setSelectionRange(
+      selectionStart,
+      selectionStart,
+    );
+  }
+  if (key === 'Tab') {
+    changeTextAtCursor('\t');
+  }
+  textarea.focus();
+}
+
 
 function showTextInTextearea(event, key) {
   const textarea = document.querySelector('.textarea');
   if (key) {
-    let result;
     event.preventDefault();
     const element = document.querySelector(`[data-id="${key}"]`);
     const { children } = element;
@@ -28,25 +57,12 @@ function showTextInTextearea(event, key) {
           text = child.textContent;
         }
       });
-      result = text;
+      changeTextAtCursor(text);
     } else {
-      result = element.textContent.trim();
+      changeTextAtCursor(element.textContent.trim());
     }
-    if (returnIsShift() || returnIsCapsLock()) result = result.toUpperCase();
-    textarea.value += result;
     textarea.focus();
   }
-}
-
-function actionsWithButtonsTextarea(key) {
-  const textarea = document.querySelector('.textarea');
-  if (key === 'Space') textarea.value += ' ';
-  if (key === 'Enter') textarea.value += '\n';
-  if (key === 'Backspace') {
-    const removeLast = textarea.value.slice(0, -1);
-    textarea.value = removeLast;
-  }
-  textarea.focus();
 }
 
 export { showTextInTextearea, actionsWithButtonsTextarea };
