@@ -1,7 +1,5 @@
 import { checkLanguage } from './change-lang.js';
 import { returnIsShift } from './buttons-actions.js';
-import { keysEn } from './keyboard-in-en.js';
-import { keysUa } from './keyboard-in-ua.js';
 
 function insertTextAtCursor(textareaElement, text) {
   let newText = text;

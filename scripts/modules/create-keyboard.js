@@ -13,23 +13,19 @@ class Button {
   }
 
   checkValue() {
-    if (!Array.isArray(this.value)) {
-      const buttonsValues = addButtonValues(
-        this.value,
-        this.index,
-        'simpleButton',
-      );
-      [this.value, this.id, this.class] = buttonsValues;
-      return this.simpleButton();
+    if (this.value.length === 3) {
+      const buttonsValues = addButtonValues(this.value, 'buttonWithTwoValues');
+      [this.value, this.valueTwo, this.id, this.class,
+        this.extraClassOne, this.extraClassTwo] = buttonsValues;
+      return this.buttonWithTwoValues();
     }
-    if (Array.isArray(this.value) && this.value[0] === 'ArrowLeft') {
-      this.value = addButtonValues(this.value, this.index, 'arrows');
+    if (this.value.length === 4) {
+      this.value = addButtonValues(this.value, 'arrows');
       return this.arrows();
     }
-    const buttonsValues = addButtonValues(this.value, this.index, 'buttonWithTwoValues');
-    [this.value, this.valueTwo, this.id, this.shiftId, this.class,
-      this.extraClassOne, this.extraClassTwo] = buttonsValues;
-    return this.buttonWithTwoValues();
+    const buttonsValues = addButtonValues(this.value, 'simpleButton');
+    [this.value, this.id, this.class] = buttonsValues;
+    return this.simpleButton();
   }
 
   simpleButton() {
@@ -37,7 +33,7 @@ class Button {
   }
 
   buttonWithTwoValues() {
-    return ` <div class="${this.class}" data-id="${this.id}" data-shift-id="${this.shiftId}">
+    return ` <div class="${this.class}" data-id="${this.id}">
       <div class="${this.extraClassTwo}">${this.value}</div>
       <div class="${this.extraClassOne}">${this.valueTwo}</div>
     </div>`;
@@ -74,6 +70,7 @@ function createRow(row) {
 }
 
 function createKeyboard(data) {
+  console.log(data);
   const result = data.map((row) => createRow(row)).join('');
   document.querySelector('.container').innerHTML = result;
 }

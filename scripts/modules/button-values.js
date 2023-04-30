@@ -1,84 +1,60 @@
-import { checkLanguage } from './change-lang.js';
-import { keys } from './keyboard-in-ua.js';
+const buttonClasses = {
+  buttonGeneral: 'button',
+  buttonMediumRight: 'button button-meduim content-right-side',
+  buttonMediumLeft: 'button button-meduim content-left-side',
+  buttonLarge: 'button button-large',
+  buttonWithText: 'button-text',
+  buttonValue: 'button-value',
+  buttonWithLetters: 'button button-letters',
+  buttonNone: 'button-value button-value-none',
+  arrow: 'button button-arrow',
+  arrowTop: 'button button-arrow button-arrow-top',
+};
 
-const classes = [
-  'button',
-  'button button-meduim content-right-side',
-  'button button-meduim content-left-side',
-  'button button-large',
-  'button button-arrow',
-  'button button-arrow button-arrow-top',
-  'button-text',
-  'button-value',
-  'button-value button-value-none',
-  'button button-letters',
-];
-
-function createUaSimpleButtons(value) {
-  return (keys[value] || [value, value]).concat(classes[9]);
+function simpleButton(value) {
+  const [key, valueOne] = value;
+  switch (key) {
+    case 'Backspace':
+    case 'ShiftRight':
+    case 'Enter':
+      return [valueOne, key, buttonClasses.buttonMediumRight];
+    case 'Tab':
+    case 'CapsLock':
+    case 'ShiftLeft':
+      return [valueOne, key, buttonClasses.buttonMediumLeft];
+    case 'Space':
+      return [valueOne, key, buttonClasses.buttonLarge];
+    default:
+      return [valueOne, key, buttonClasses.buttonWithLetters];
+  }
 }
 
-function createUaButtonWithTwoValues(value) {
-  return [
-    value[0],
-    value[1],
-    value[1],
-    value[0],
-    classes[0],
-    classes[7],
-    classes[8],
-  ];
-}
-
-function simpleButton(value, index) {
-  const keyboardLanguage = checkLanguage();
-
-  if (value === 'Backspace') return ['&#x232b;', 'Backspace', classes[1]];
-  if (value === 'Tab') return ['&#x21e5;', 'Tab', classes[2]];
-  if (value === 'CapsLock') return ['&#x21ea;', 'CapsLock', classes[2]];
-  if (value === 'Enter') return ['&#x21a9;', 'Enter', classes[1]];
-  if (value === 'ShiftLeft' || value === 'ShiftRight') return ['&#x21e7;', value, index < 2 ? classes[2] : classes[1]];
-  if (value === 'EN' || value === 'UA') return [value, 'Fn', classes[0]];
-  if (value === ' ') return [' ', ' ', classes[3]];
-
-  return keyboardLanguage === 'En'
-    ? [value, value, classes[9]]
-    : createUaSimpleButtons(value);
-}
-
-function arrowsButtons() {
-  const arrows = ['&#x25C0;', '&#x25B2;', '&#x25BC;', '&#x25B6;'];
-  const left = [arrows[0], 'ArrowLeft', classes[4]];
-  const up = [arrows[1], 'ArrowUp', classes[5]];
-  const down = [arrows[2], 'ArrowDown', classes[4]];
-  const right = [arrows[3], 'ArrowRight', classes[4]];
+function arrowsButtons(value) {
+  const [leftArrow, upArrow, downArrow, rightArrow] = value.map((el) => el);
+  const left = [leftArrow[1], leftArrow[0], buttonClasses.arrow];
+  const up = [upArrow[1], upArrow[0], buttonClasses.arrowTop];
+  const down = [downArrow[1], downArrow[0], buttonClasses.arrow];
+  const right = [rightArrow[1], rightArrow[0], buttonClasses.arrow];
   return [left, up, down, right];
 }
 
 function buttonWithTwoValues(value) {
-  const keyboardLanguage = checkLanguage();
-
-  switch (value[1]) {
-    case 'Control':
-      return [value[0], 'control', value[1], value[1], classes[0], classes[6]];
-    case 'AltLeft':
-    case 'AltRight':
-      return [value[0], 'option', value[1], value[1], classes[0], classes[6]];
-    case 'MetaLeft':
-    case 'MetaRight':
-      return [value[0], 'command', value[1], value[1], classes[0], classes[6]];
-    default:
-      return keyboardLanguage === 'En'
-        ? [value[0], value[1], value[1], value[0], classes[0], classes[7], classes[8]]
-        : createUaButtonWithTwoValues(value);
+  const [key, valueOne, valueTwo] = value;
+  const keys = ['ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft', 'MetaRight'];
+  if (keys.includes(key)) {
+    return [valueOne, valueTwo, key,
+      buttonClasses.buttonGeneral, buttonClasses.buttonWithText];
   }
+  return [valueOne, valueTwo, key,
+    buttonClasses.buttonGeneral, buttonClasses.buttonValue, buttonClasses.buttonNone];
 }
 
-function addButtonValues(value, index, buttonType) {
+function addButtonValues(value, buttonType) {
   let result;
-  if (buttonType === 'simpleButton') result = simpleButton(value, index);
-  if (buttonType === 'arrows')result = arrowsButtons();
+  if (buttonType === 'simpleButton') result = simpleButton(value);
+  if (buttonType === 'arrows')result = arrowsButtons(value);
   if (buttonType === 'buttonWithTwoValues') result = buttonWithTwoValues(value);
   return result;
 }
+
 export default addButtonValues;

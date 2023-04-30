@@ -1,20 +1,22 @@
-import { keyboardLayoutUkraine } from './keyboard-in-ua.js';
-import { keyboardLayoutEnglish } from './keyboard-in-en.js';
+import keyboardLayoutUkraine from './keyboard-in-ua.js';
+import keyboardLayoutEnglish from './keyboard-in-en.js';
 
-// let language = JSON.parse(localStorage.getItem('keyboardLanguage'));
+// let language = JSON.parse(localStorage.getItem('keyboardLanguageSave'));
 let language;
 if (!language) language = keyboardLayoutEnglish;
+let keyboardLanguage = 'En';
 
 function changeLanguage(currentLanguage) {
-  const updateLanguage = currentLanguage
-  === keyboardLayoutEnglish ? keyboardLayoutUkraine : keyboardLayoutEnglish;
-  // localStorage.setItem('keyboardLanguage', JSON.stringify(updateLanguage));
+  const updateLanguage = currentLanguage === keyboardLayoutEnglish
+    ? (keyboardLayoutUkraine, (keyboardLanguage = 'Ua'))
+    : (keyboardLayoutEnglish, (keyboardLanguage = 'En'));
+  // localStorage.setItem('keyboardLanguageSave', JSON.stringify(updateLanguage));
   language = updateLanguage;
   return updateLanguage;
 }
 
 function checkLanguage() {
-  return Array.isArray(language[0][0]) ? 'En' : 'Ua';
+  return keyboardLanguage;
 }
 
 function returnLanguage() {
