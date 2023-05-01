@@ -24,6 +24,8 @@ function simpleButton(value) {
       return [valueOne, key, buttonClasses.buttonMediumLeft];
     case 'Space':
       return [valueOne, key, buttonClasses.buttonLarge];
+    case 'Delete':
+      return [valueOne, key, buttonClasses.buttonGeneral];
     default:
       return [valueOne, key, buttonClasses.buttonWithLetters];
   }

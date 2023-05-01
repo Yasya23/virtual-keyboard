@@ -13,12 +13,8 @@ function changeLanguage(currentLanguage) {
   return updateLanguage;
 }
 
-function checkLanguage() {
-  return language[4][1] === 'EN' ? 'En' : 'Ua';
-}
-
 function returnLanguage() {
   return language;
 }
 
-export { returnLanguage, changeLanguage, checkLanguage };
+export { returnLanguage, changeLanguage };
