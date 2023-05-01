@@ -1,4 +1,4 @@
-import { returnIsCapsLock, returnIsShift } from './is-buttons.js';
+import { returnIsCapsLock, returnIsShift } from './is-true-buttons.js';
 
 function changeTextAtCursor(text) {
   const textarea = document.querySelector('.textarea');
@@ -16,7 +16,6 @@ function changeTextAtCursor(text) {
 
 function actionsWithButtonsTextarea(key) {
   const textarea = document.querySelector('.textarea');
-  const arrows = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
   const { selectionStart, value } = textarea;
   if (key === 'Space') changeTextAtCursor(' ');
   if (key === 'Enter') changeTextAtCursor('\n');

@@ -1,6 +1,6 @@
 const keyboardLayoutEnglish = [
   [
-    ['Backquote', '~', '`'],
+    ['Backquote', '±', '§'],
     ['Digit1', '!', '1'],
     ['Digit2', '@', '2'],
     ['Digit3', '#', '3'],

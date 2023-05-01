@@ -4,8 +4,8 @@ import { showTextInTextearea, actionsWithButtonsTextarea } from './modules/texta
 import { returnLanguage, changeLanguage } from './modules/change-lang.js';
 import {
   returnIsShift, updateIsShift, returnIsCapsLock, updateIsCapsLock,
-} from './modules/is-buttons.js';
-import { buttons, buttonsTexteareaActions } from './modules/buttons.js';
+} from './modules/is-true-buttons.js';
+import { buttons, buttonsTexteareaActions } from './modules/buttons-keys.js';
 
 let pressedBtn = [];
 
@@ -67,7 +67,13 @@ document.addEventListener('click', (event) => {
   const { id } = parentElement?.dataset ?? {};
   if (id) {
     if (!buttons.includes(id)) showTextInTextearea(event, id);
-    if (id === 'Fn') createKeyboard(changeLanguage(returnLanguage()));
+    if (id === 'Fn') {
+      createKeyboard(changeLanguage(returnLanguage()));
+      if (returnIsCapsLock()) {
+        updateIsCapsLock(false);
+        capsLockClicked('CapsLock');
+      }
+    }
     if (id === 'CapsLock') capsLockClicked(id);
     if (buttonsTexteareaActions.includes(id)) actionsWithButtonsTextarea(id);
   }
@@ -93,6 +99,10 @@ document.addEventListener('keydown', (event) => {
     pressedBtn.includes('ControlLeft') && (pressedBtn.includes('AltLeft') || pressedBtn.includes('AltRight'))
   ) {
     createKeyboard(changeLanguage(returnLanguage()));
+    if (returnIsCapsLock()) {
+      updateIsCapsLock(false);
+      capsLockClicked('CapsLock');
+    }
   }
   highlighteButtons();
 });
