@@ -11,9 +11,9 @@ module.exports = {
   rules: {},
   overrides: [
     {
-      files: ['*.js'], // add the files you want to override the rule for
+      files: ['*.js'],
       rules: {
-        'import/extensions': 'off', // disable the rule for these files
+        'import/extensions': 'off',
       },
     },
   ],
