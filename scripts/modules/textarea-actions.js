@@ -4,6 +4,7 @@ function changeTextAtCursor(text) {
   const textarea = document.querySelector('.textarea');
   let newText = text;
   if (returnIsShift() || returnIsCapsLock()) newText = newText.toUpperCase();
+  if (returnIsShift() && returnIsCapsLock()) newText = newText.toLowerCase();
   const { selectionStart: cursorPosition, value: currentValue } = textarea;
   const prefix = currentValue.slice(0, cursorPosition);
   const suffix = currentValue.slice(cursorPosition);
